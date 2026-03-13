@@ -1,0 +1,90 @@
+GUJARATI VOCABULARY
+
+=== GREETINGS ===
+નમસ્તે (namaste) = Hello Greetings
+નમસ્કાર (namaskar) = Hello formal
+કેમ છો (kem chho) = How are you formal
+કેમ છે (kem chhe) = How are you informal
+સારું છે (saaru chhe) = I am fine
+ઠીક છે (theek chhe) = It is okay
+આભાર (aabhar) = Thank you
+ખૂબ આભાર (khub aabhar) = Thank you very much
+માફ કરો (maaf karo) = Sorry Excuse me
+ફરી મળીશું (fari malishum) = See you again Goodbye
+શુભ સવાર (shubh savar) = Good morning
+શુભ રાત્રી (shubh raatri) = Good night
+શુભ બપોર (shubh bapor) = Good afternoon
+હા (haa) = Yes
+ના (naa) = No
+
+=== NUMBERS ===
+1 = એક (ek)
+2 = બે (be)
+3 = ત્રણ (tran)
+4 = ચાર (char)
+5 = પાંચ (panch)
+6 = છ (chha)
+7 = સાત (saat)
+8 = આઠ (aath)
+9 = નવ (nav)
+10 = દસ (das)
+20 = વીસ (vis)
+50 = પચાસ (pachaas)
+100 = સો (so)
+1000 = હજાર (hajaar)
+
+=== COLORS ===
+લાલ (laal) = Red
+વાદળી (neelo) = Blue
+લીલો (lilo) = Green
+પીળો (pilo) = Yellow
+સફેદ (safed) = White
+કાળો (kaalo) = Black
+નારંગી (narangi) = Orange
+ગુલાબી (gulaabi) = Pink
+જાંબુડી (jaambudi) = Purple
+
+=== FAMILY ===
+માતા મા (maata maa) = Mother
+પિતા પપ્પા (pita pappa) = Father
+ભાઈ (bhai) = Brother
+બહેન (bahen) = Sister
+દાદા (daada) = Paternal grandfather
+દાદી (daadi) = Paternal grandmother
+નાના (naana) = Maternal grandfather
+નાની (naani) = Maternal grandmother
+પુત્ર (putra) = Son
+પુત્રી (putri) = Daughter
+
+=== DAYS ===
+સોમવાર (Somvaar) = Monday
+મંગળવાર (Mangalvaar) = Tuesday
+બુધવાર (Budhvaar) = Wednesday
+ગુરુવાર (Guruvaar) = Thursday
+શુક્રવાર (Shukravaar) = Friday
+શનિવાર (Shanivaar) = Saturday
+રવિવાર (Ravivaar) = Sunday
+આજ (aaj) = Today
+કાલ (kaal) = Tomorrow Yesterday
+
+=== FOOD ===
+પાણી (paani) = Water
+ચા (chaa) = Tea
+દૂધ (dudh) = Milk
+ભાત (bhaat) = Rice
+રોટલી (rotli) = Flatbread
+દાળ (daal) = Lentil soup
+ફળ (fal) = Fruit
+હું ભૂખ્યો છું (hu bhukhyo chhu) = I am hungry male
+હું ભૂખી છું (hu bhukhi chhu) = I am hungry female
+પાણી આપો (paani aapo) = Please give water
+
+=== USEFUL PHRASES ===
+મારું નામ ___ છે = My name is ___
+તમારું નામ શું છે = What is your name
+મને ગુજરાતી નથી આવડતું = I do not know Gujarati
+ધીરે બોલો = Please speak slowly
+ફરીથી કહો = Please say that again
+મને સમજ પડ્યું = I understood
+મને સમજ ન પડ્યું = I did not understand
+ભારત મારો દેશ છે = India is my country
