@@ -1,4 +1,4 @@
-# ગુજ AI Tutor — Offline Gujarati Language Tutor
+# Gujarati AI Tutor — Offline Gujarati Language Tutor
 ### DJ Sanghvi College of Engineering | Information Technology
 ### IPD Project 2025-26 | Team Members: Sakshi Shah, Anay Shah, Keya Divecha, Shubham Jain
 ### Guide: Mr. Chandrashekhar Badgujar
