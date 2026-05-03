@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "Which letter is the Gujarati vowel for 'A'?",
+    "options": ["અ", "આ", "ઇ", "ઉ"],
+    "answer": "અ",
+    "skill": "vowels",
+    "difficulty": "easy",
+    "translation": "Identify the short 'A' vowel in Gujarati script"
+  },
+  {
+    "id": 2,
+    "question": "Which Gujarati vowel makes the 'AA' sound?",
+    "options": ["અ", "આ", "એ", "ઓ"],
+    "answer": "આ",
+    "skill": "vowels",
+    "difficulty": "easy",
+    "translation": "Identify the long 'AA' vowel in Gujarati script"
+  },
+  {
+    "id": 3,
+    "question": "Which Gujarati vowel makes the 'I' (short) sound?",
+    "options": ["ઇ", "ઈ", "ઉ", "એ"],
+    "answer": "ઇ",
+    "skill": "vowels",
+    "difficulty": "easy",
+    "translation": "Identify the short 'I' vowel"
+  },
+  {
+    "id": 4,
+    "question": "Which Gujarati vowel makes the 'U' (short) sound?",
+    "options": ["ઊ", "ઉ", "ઓ", "ઔ"],
+    "answer": "ઉ",
+    "skill": "vowels",
+    "difficulty": "easy",
+    "translation": "Identify the short 'U' vowel"
+  },
+  {
+    "id": 5,
+    "question": "The vowel 'એ' in Gujarati makes which sound?",
+    "options": ["A", "E", "O", "U"],
+    "answer": "E",
+    "skill": "vowels",
+    "difficulty": "easy",
+    "translation": "What sound does 'એ' represent?"
+  },
+  {
+    "id": 6,
+    "question": "Which of these is the Gujarati vowel for 'O' sound?",
+    "options": ["ઓ", "ઔ", "અ", "ઈ"],
+    "answer": "ઓ",
+    "skill": "vowels",
+    "difficulty": "medium",
+    "translation": "Identify the 'O' vowel in Gujarati"
+  },
+  {
+    "id": 7,
+    "question": "The matra (vowel sign) ા is used with consonants to produce which sound?",
+    "options": ["AA (આ)", "I (ઇ)", "U (ઉ)", "E (એ)"],
+    "answer": "AA (આ)",
+    "skill": "vowels",
+    "difficulty": "medium",
+    "translation": "Which vowel sound does the matra ા represent?"
+  },
+  {
+    "id": 8,
+    "question": "What does કા sound like?",
+    "options": ["Ki", "Ku", "Kaa", "Ke"],
+    "answer": "Kaa",
+    "skill": "vowels",
+    "difficulty": "medium",
+    "translation": "Apply the ા matra to the consonant ક"
+  },
+  {
+    "id": 9,
+    "question": "How do you write the number 1 in Gujarati?",
+    "options": ["૧", "૨", "૩", "૪"],
+    "answer": "૧",
+    "skill": "numbers",
+    "difficulty": "easy",
+    "translation": "Which Gujarati numeral means 1?"
+  },
+  {
+    "id": 10,
+    "question": "What number is ૫ in Gujarati?",
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
+    "skill": "numbers",
+    "difficulty": "easy",
+    "translation": "Read the Gujarati numeral ૫"
+  },
+  {
+    "id": 11,
+    "question": "What is the Gujarati word for the number 2?",
+    "options": ["એક", "બે", "ત્રણ", "ચાર"],
+    "answer": "બે",
+    "skill": "numbers",
+    "difficulty": "easy",
+    "translation": "Which word means 'two' in Gujarati?"
+  },
+  {
+    "id": 12,
+    "question": "What does 'પાંચ' mean in English?",
+    "options": ["Three", "Four", "Five", "Six"],
+    "answer": "Five",
+    "skill": "numbers",
+    "difficulty": "easy",
+    "translation": "Translate 'પાંચ' to English"
+  },
+  {
+    "id": 13,
+    "question": "What is the Gujarati word for 10?",
+    "options": ["સાત", "આઠ", "નવ", "દસ"],
+    "answer": "દસ",
+    "skill": "numbers",
+    "difficulty": "easy",
+    "translation": "Which word means 'ten'?"
+  },
+  {
+    "id": 14,
+    "question": "How do you say 'seven' in Gujarati?",
+    "options": ["છ", "સાત", "આઠ", "નવ"],
+    "answer": "સાત",
+    "skill": "numbers",
+    "difficulty": "medium",
+    "translation": "Translate 'seven' into Gujarati"
+  },
+  {
+    "id": 15,
+    "question": "What does 'બાર' mean?",
+    "options": ["Ten", "Eleven", "Twelve", "Twenty"],
+    "answer": "Twelve",
+    "skill": "numbers",
+    "difficulty": "medium",
+    "translation": "Translate 'બાર' to English"
+  },
+  {
+    "id": 16,
+    "question": "Which numeral is ૧૦ in Gujarati?",
+    "options": ["1", "10", "100", "11"],
+    "answer": "10",
+    "skill": "numbers",
+    "difficulty": "medium",
+    "translation": "Read the Gujarati numeral ૧૦"
+  },
+  {
+    "id": 17,
+    "question": "How do you say 'Hello' / 'Greetings' in Gujarati?",
+    "options": ["આવજો", "નમસ્તે", "આભાર", "હા"],
+    "answer": "નમસ્તે",
+    "skill": "greetings",
+    "difficulty": "easy",
+    "translation": "Which word means 'Hello' in Gujarati?"
+  },
+  {
+    "id": 18,
+    "question": "What does 'આભાર' mean in English?",
+    "options": ["Hello", "Goodbye", "Thank you", "Sorry"],
+    "answer": "Thank you",
+    "skill": "greetings",
+    "difficulty": "easy",
+    "translation": "Translate 'આભાર'"
+  },
+  {
+    "id": 19,
+    "question": "How do you say 'Goodbye' in Gujarati?",
+    "options": ["નમસ્તે", "આભાર", "આવજો", "માફ કરજો"],
+    "answer": "આવજો",
+    "skill": "greetings",
+    "difficulty": "easy",
+    "translation": "Which phrase means 'Goodbye'?"
+  },
+  {
+    "id": 20,
+    "question": "What does 'માફ કરજો' mean?",
+    "options": ["Thank you", "Please", "Excuse me / Sorry", "Welcome"],
+    "answer": "Excuse me / Sorry",
+    "skill": "greetings",
+    "difficulty": "easy",
+    "translation": "Translate 'માફ કરજો'"
+  },
+  {
+    "id": 21,
+    "question": "How do you ask 'How are you?' in Gujarati?",
+    "options": ["તમારું નામ શું છે?", "તમે કેમ છો?", "તમે ક્યાં છો?", "શું થયું?"],
+    "answer": "તમે કેમ છો?",
+    "skill": "greetings",
+    "difficulty": "easy",
+    "translation": "Which sentence means 'How are you?'"
+  },
+  {
+    "id": 22,
+    "question": "What is the correct response to 'તમે કેમ છો?' meaning 'I am fine'?",
+    "options": ["હું ઠીક છું", "હું ભૂખ્યો છું", "હું થાકેલો છું", "હું ખુશ નથી"],
+    "answer": "હું ઠીક છું",
+    "skill": "greetings",
+    "difficulty": "medium",
+    "translation": "Which phrase means 'I am fine'?"
+  },
+  {
+    "id": 23,
+    "question": "How do you say 'Good morning' in Gujarati?",
+    "options": ["શુભ રાત્રિ", "શુભ સવાર", "શુભ સાંજ", "શુભ બપોર"],
+    "answer": "શુભ સવાર",
+    "skill": "greetings",
+    "difficulty": "medium",
+    "translation": "Which phrase means 'Good morning'?"
+  },
+  {
+    "id": 24,
+    "question": "What does 'પાણી' mean in English?",
+    "options": ["Food", "Water", "Milk", "Juice"],
+    "answer": "Water",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Translate 'પાણી'"
+  },
+  {
+    "id": 25,
+    "question": "What is the Gujarati word for 'house'?",
+    "options": ["ઘર", "ગામ", "શહેર", "શેરી"],
+    "answer": "ઘર",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Which word means 'house' in Gujarati?"
+  },
+  {
+    "id": 26,
+    "question": "What does 'ભાઈ' mean?",
+    "options": ["Sister", "Brother", "Father", "Friend"],
+    "answer": "Brother",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Translate 'ભાઈ'"
+  },
+  {
+    "id": 27,
+    "question": "What is the Gujarati word for 'school'?",
+    "options": ["દવાખાનું", "શાળા", "બજાર", "મંદિર"],
+    "answer": "શાળા",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Which word means 'school'?"
+  },
+  {
+    "id": 28,
+    "question": "What does 'સફરજન' mean in English?",
+    "options": ["Mango", "Banana", "Apple", "Orange"],
+    "answer": "Apple",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Translate 'સફરજન'"
+  },
+  {
+    "id": 29,
+    "question": "What is the Gujarati word for 'book'?",
+    "options": ["પેન", "પુસ્તક", "થેલો", "ખુરશી"],
+    "answer": "પુસ્તક",
+    "skill": "basic_vocab",
+    "difficulty": "easy",
+    "translation": "Which word means 'book'?"
+  },
+  {
+    "id": 30,
+    "question": "What does 'બિલાડી' mean?",
+    "options": ["Dog", "Cat", "Bird", "Fish"],
+    "answer": "Cat",
+    "skill": "basic_vocab",
+    "difficulty": "medium",
+    "translation": "Translate 'બિલાડી'"
+  },
+  {
+    "id": 31,
+    "question": "What is the Gujarati word for 'sun'?",
+    "options": ["ચંદ્ર", "તારો", "સૂર્ય", "આકાશ"],
+    "answer": "સૂર્ય",
+    "skill": "basic_vocab",
+    "difficulty": "medium",
+    "translation": "Which word means 'sun'?"
+  },
+  {
+    "id": 32,
+    "question": "What does 'લાલ' mean in English?",
+    "options": ["Blue", "Green", "Yellow", "Red"],
+    "answer": "Red",
+    "skill": "basic_vocab",
+    "difficulty": "medium",
+    "translation": "Translate the colour word 'લાલ'"
+  },
+  {
+    "id": 33,
+    "question": "What does 'મારું નામ રાહુલ છે' mean?",
+    "options": ["My name is Rahul", "I am from Rahul", "Rahul is my friend", "Where is Rahul?"],
+    "answer": "My name is Rahul",
+    "skill": "simple_sentences",
+    "difficulty": "easy",
+    "translation": "Translate 'મારું નામ રાહુલ છે'"
+  },
+  {
+    "id": 34,
+    "question": "How do you say 'I am hungry' in Gujarati?",
+    "options": ["હું ભૂખ્યો છું", "હું તરસ્યો છું", "હું થાકેલો છું", "હું ઊંઘ્યો છું"],
+    "answer": "હું ભૂખ્યો છું",
+    "skill": "simple_sentences",
+    "difficulty": "easy",
+    "translation": "Which sentence means 'I am hungry'?"
+  },
+  {
+    "id": 35,
+    "question": "What does 'આ મારો ભાઈ છે' mean?",
+    "options": ["This is my friend", "This is my brother", "This is my father", "This is my teacher"],
+    "answer": "This is my brother",
+    "skill": "simple_sentences",
+    "difficulty": "easy",
+    "translation": "Translate 'આ મારો ભાઈ છે'"
+  },
+  {
+    "id": 36,
+    "question": "How do you say 'I go to school' in Gujarati?",
+    "options": ["હું ઘરે જાઉ છું", "હું શાળાએ જાઉ છું", "હું બજારે જાઉ છું", "હું મંદિરે જાઉ છું"],
+    "answer": "હું શાળાએ જાઉ છું",
+    "skill": "simple_sentences",
+    "difficulty": "easy",
+    "translation": "Which sentence means 'I go to school'?"
+  },
+  {
+    "id": 37,
+    "question": "What does 'મને ગુજરાતી ગમે છે' mean?",
+    "options": ["I speak Gujarati", "I like Gujarati", "I learn Gujarati", "I write Gujarati"],
+    "answer": "I like Gujarati",
+    "skill": "simple_sentences",
+    "difficulty": "medium",
+    "translation": "Translate 'મને ગુજરાતી ગમે છે'"
+  },
+  {
+    "id": 38,
+    "question": "Which sentence correctly means 'The book is on the table'?",
+    "options": ["પુસ્તક ખુરશી પર છે", "પુસ્તક ટેબલ પર છે", "ટેબલ પુસ્તક પર છે", "પુસ્તક ઘરમાં છે"],
+    "answer": "પુસ્તક ટેબલ પર છે",
+    "skill": "simple_sentences",
+    "difficulty": "medium",
+    "translation": "Identify the correct sentence for 'The book is on the table'"
+  },
+  {
+    "id": 39,
+    "question": "What does 'તમારું નામ શું છે?' mean?",
+    "options": ["Where do you live?", "What is your name?", "How old are you?", "What do you do?"],
+    "answer": "What is your name?",
+    "skill": "simple_sentences",
+    "difficulty": "medium",
+    "translation": "Translate 'તમારું નામ શું છે?'"
+  },
+  {
+    "id": 40,
+    "question": "How do you say 'I do not understand' in Gujarati?",
+    "options": ["મને ખબર છે", "મને સમજાતું નથી", "હું સાંભળું છું", "મને ગમે છે"],
+    "answer": "મને સમજાતું નથી",
+    "skill": "simple_sentences",
+    "difficulty": "medium",
+    "translation": "Which sentence means 'I do not understand'?"
+  }
+]

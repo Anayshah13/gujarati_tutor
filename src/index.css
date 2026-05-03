@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --accent-color: #FF9933; /* Saffron */
+  --accent-light: #FFF0E0;
+  --text-dark: #1E293B;
+  --text-muted: #64748B;
+  --bg-color: #FAFAFA;
+  --card-bg: #FFFFFF;
+  --correct-color: #10B981;
+  --incorrect-color: #EF4444;
+  --border-color: #E2E8F0;
+  --font-gujarati: 'Noto Sans Gujarati', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nav Bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background-color: var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.nav-brand {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-link.active, .nav-link:hover {
+  color: var(--text-dark);
+}
+
+/* Onboarding */
+.onboarding-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.onboarding-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.onboarding-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.level-cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.level-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  width: 280px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.level-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(255, 153, 51, 0.25);
+}
+
+.level-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.level-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.level-desc {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Quiz Screen */
+.quiz-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 2rem;
+}
+
+.question-card {
+  flex: 2;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  width: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  text-align: center;
+}
+
+.skill-badge {
+  display: inline-block;
+  background-color: var(--accent-light);
+  color: #D97706;
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+
+.question-text {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.gujarati-text {
+  font-family: var(--font-gujarati);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 2.5rem;
+  line-height: 1.4;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.option-btn {
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 12px;
+  font-family: var(--font-gujarati);
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--accent-color);
+  background-color: var(--accent-light);
+}
+
+.option-btn.correct {
+  background-color: #ECFDF5;
+  border-color: var(--correct-color);
+  color: #065F46;
+}
+
+.option-btn.incorrect {
+  background-color: #FEF2F2;
+  border-color: var(--incorrect-color);
+  color: #991B1B;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Progress Panel */
+.progress-panel {
+  flex: 1;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  min-width: 280px;
+  max-width: 350px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.progress-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-progress-item {
+  margin-bottom: 1rem;
+}
+
+.skill-progress-item:last-child {
+  margin-bottom: 0;
+}
+
+.skill-label-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.skill-name {
+  text-transform: capitalize;
+}
+
+.skill-value {
+  color: var(--text-muted);
+}
+
+.progress-bar-bg {
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-bar-fill.mastered {
+  background-color: var(--correct-color);
+}
+
+.mastery-check {
+  color: var(--correct-color);
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.next-btn {
+  margin-top: 2rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  font-family: var(--font-ui);
+}
+
+.next-btn:hover {
+  background-color: #E68A2E;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .progress-panel {
+    max-width: 100%;
+  }
+}
