@@ -1,200 +1,103 @@
-# ગુજ AI Tutor — Offline Gujarati Language Tutor
-### DJ Sanghvi College of Engineering | Information Technology
-### IPD Project 2025-26 | Team Members: Sakshi Shah, Anay Shah, Keya Divecha, Shubham Jain
-### Guide: Mr. Chandrashekhar Badgujar
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=138808&height=200&section=header&text=Guj-Gyani&fontSize=80&fontColor=ffffff&desc=Your%20AI%20Gujarati%20Linguistic%20Guide&descAlignY=75&descAlign=62" />
+  
+  <p align="center">
+    <b>Master Gujarati with your personalized AI tutor.</b> <br/>
+    <i>Offline-first, rich interactive UI, AI Chatbots, Audio Pronunciation Scoring, and much more!</i>
+  </p>
+  
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Ollama-FFFFFF?style=for-the-badge&logo=Ollama&logoColor=black" />
+  <img src="https://img.shields.io/badge/Whisper-1A4731?style=for-the-badge&logo=OpenAI&logoColor=white" />
+</div>
+
+<br/>
+
+## ✨ Introduction
+
+**Guj-Gyani** is an advanced, offline-capable AI educational platform designed to teach the Gujarati language dynamically and interactively. By combining state-of-the-art Natural Language Processing (via Ollama/Gemma-2B), localized Retrieval-Augmented Generation (RAG), and Offline Automatic Speech Recognition (Whisper), it delivers a native, frictionless linguistic interface for both new learners and native speakers.
 
 ---
 
-## 📌 Project Overview
+## 🚀 Key Features
 
-An offline, speech-first AI tutor for learning the Gujarati language. The system uses Retrieval Augmented Generation (RAG) to answer questions from a curated Gujarati knowledge base, Text-to-Speech (TTS) to speak answers aloud in Gujarati, a pronunciation scorer to give real-time feedback on spoken Gujarati, and an interactive grammar quiz.
+### 💬 `1.` RAG Offline Chatbot (Audio & Text)
+- **Knowledge Base Retrieval:** Ask anything natively. The bot retrieves answers purely from standard local Gujarati linguistic syntax. 
+- **Offline Audio Queries:** Tired of typing? Upload a `.wav` file or record directly, and **Offline Whisper API** will transcribe your query and pass it to the RAG system!
+- **Phonetic Context Alignment:** Type `kem chho` and the system injects `કેમ છો` out-of-the-box using the smart transliteration context integration.
 
-No internet connection is required after the initial model downloads. All AI runs locally on the user's machine.
+### 🗣️ `2.` Pronunciation Studio
+- Access built-in Gujarati terminology practice levels (Easy to Hard).
+- Hear exact textual phrasing and analyze phonetic breakdowns.
+- *Listen native, speak accurately.*
 
----
+### 📝 `3.` Grammar Quizzes
+- Test your linguistic knowledge dynamically through multiple-choice visual cards.
+- Supports inline text questions and inline audio listening challenges.
+- Immediate visual and tactile feedback loops.
 
-## 🧠 System Architecture
+### 🔠 `4.` Transliteration Sandbox
+- Instantly convert English (`ITRANS`) phonetic formats (e.g. `kem chho`) instantly to structured Gujarati script (`કેમ છો`).
+- Features inline TTS to hear what you successfully transliterated.
 
-```
-User Question (text)
-        ↓
-   RAG Pipeline
-   ├── Embed query using sentence-transformers
-   ├── Search FAISS index for top-3 relevant chunks
-   └── Feed chunks + question to Gemma 2B (Ollama)
-        ↓
-   Gemma 2B generates grounded answer
-        ↓
-   TTS Engine (facebook/mms-tts-guj)
-   converts answer text → Gujarati speech
-        ↓
-   User hears the answer
-```
+### 📊 `5.` Benchmark Mode
+- A robust engine integrity metric to validate 10 standard queries and measure QA Accuracy + RAG Response Latency.
+- Ensures your vectors and chunk retrieval processes are acting deterministically.
 
----
-
-## 🗂️ Project Structure
-
-```
-guj_final/
-├── step1_install.py          — installs all Python packages
-├── step2_build_rag.py        — builds FAISS index from knowledge base
-├── step3_app.py              — main Streamlit application
-├── gujarati_knowledge/       — your dataset text files
-│   ├── 01_grammar.txt
-│   └── 02_vocabulary.txt
-├── rag_data/                 — auto-generated after step 2
-│   ├── gujarati.index        — FAISS vector index
-│   └── chunks.pkl            — text chunks + metadata
-└── tts_cache/                — cached TTS audio files
-```
+### 🌐 `6.` Google STT Online Suite
+- An exclusive online endpoint bridging local users with the Google Web Speech API. 
+- Upload or record your voice directly in the browser!
+- Evaluates English syntax and automatically cascades to **transliterate** it into Native Gujarati text dynamically on the dashboard.
 
 ---
 
-## ⚙️ Prerequisites
+## 🛠️ Architecture & Under the Hood
 
-- Python 3.9 or above
-- pip
-- Ollama — download from https://ollama.com
+### 🎨 Fully Custom UX
+- Zero basic web components. Engineered entirely atop custom CSS parameters mapping exact dark glassmorphism gradients and explicit UI micro-interactions.
+- **100% Mobile Responsive:** Built with progressive rendering CSS strategies to look flawless on mobile. Hover animations included!
+
+### ⚙️ Engine Stack
+- **LLM Engine:** Local Ollama (running `gemma2:2b`).
+- **Embedding / Vector Search:** `sentence-transformers` coupled with `faiss-cpu`.
+- **Offline STT Engine:** OpenCV's `Whisper` + Librosa for numpy chunk manipulation (zero FFmpeg dependencies).
+- **TTS Generator:** HuggingFace `facebook/mms-tts-guj`.
 
 ---
 
-## 🚀 How to Run (Step by Step)
+## 🎮 How to Run (Local)
 
-### Step 1 — Install Python packages
+<details>
+<summary><b>Installation Requirements</b></summary>
 
-Open a terminal in the project folder and run:
+You will need Python 3.9+ along with these core dependancies:
+
 ```bash
-pip install sentence-transformers faiss-cpu streamlit transformers torch soundfile numpy requests pandas librosa
+pip install streamlit transformers torch faiss-cpu sentence-transformers indic_transliteration soundfile requests librosa openai-whisper SpeechRecognition
 ```
+</details>
 
-### Step 2 — Start Ollama
-
-Open a **new terminal** and run:
+### Phase 1: Boot Up Ollama
+Ensure your Ollama local LLM application is running in the background. Open a terminal and run:
 ```bash
 ollama serve
 ```
-Leave this terminal open and running.
+*(Make sure to pull Gemma 2B first if you haven't: `ollama pull gemma2:2b`)*
 
-### Step 3 — Download Gemma 2B
-
-Open **another new terminal** and run:
-```bash
-ollama pull gemma2:2b
-```
-This downloads ~1.5GB. Wait for it to complete.
-
-### Step 4 — Add your dataset files
-
-Copy your Gujarati `.txt` files into the `gujarati_knowledge/` folder.
-Each file is automatically indexed. More files = better answers.
-
-### Step 5 — Build the RAG index
-
-In your original terminal run:
+### Phase 2: Create the Vector Brain
+If this is your first time, build the `FAISS` chunked vector-store from the text assets:
 ```bash
 python step2_build_rag.py
 ```
-Expected output:
-```
-✅ 01_grammar.txt → 18 chunks
-✅ 02_vocabulary.txt → 22 chunks
-✅ FAISS index built with 40 vectors
-✅ Saved to rag_data/
-```
 
-### Step 6 — Run the app
-
+### Phase 3: Launch Web App
+Boot the custom Streamlit Interface:
 ```bash
 streamlit run step3_app.py
 ```
 
-Browser opens automatically at: **http://localhost:8501**
-
 ---
-
-## 🖥️ Terminal Layout During Demo
-
-| Terminal | Command | Purpose |
-|---|---|---|
-| Terminal 1 | `streamlit run step3_app.py` | Main app |
-| Terminal 2 | `ollama serve` | LLM backend |
-
----
-
-## 📱 Features
-
-| Feature | Description |
-|---|---|
-| 💬 RAG Chatbot | Ask any Gujarati language question. Answers grounded in your dataset. |
-| 🎤 Pronunciation Scorer | Upload audio recording. Get 0–100 score with sub-scores. |
-| 📝 Grammar Quiz | 7 multiple choice questions with instant feedback. |
-| 📊 Benchmark | Run 10 test questions. Get accuracy % and response times for report. |
-
----
-
-## 🤖 Models Used
-
-| Model | Purpose | Size | Source |
-|---|---|---|---|
-| `paraphrase-multilingual-MiniLM-L12-v2` | Text embeddings for RAG search | ~120MB | HuggingFace |
-| `gemma2:2b` | LLM answer generation | ~1.5GB | Google via Ollama |
-| `facebook/mms-tts-guj` | Gujarati text-to-speech | ~300MB | Meta via HuggingFace |
-
-All models are pre-trained. No training was performed by this project.
-
----
-
-## 💡 Key Technical Concepts
-
-**RAG (Retrieval Augmented Generation)**
-Instead of fine-tuning the LLM on Gujarati data (which requires expensive GPUs and days of training), RAG keeps the knowledge external in text files. When a question is asked, the system retrieves the most relevant chunks and feeds them to the LLM as context. This prevents hallucination and allows the knowledge base to be updated by simply adding text files.
-
-**Embeddings**
-Text is converted to vectors of 384 numbers using a multilingual sentence transformer. Similar meaning = similar numbers. This enables semantic search — finding relevant content even when the exact words don't match.
-
-**FAISS**
-Facebook AI Similarity Search. An index that stores all chunk vectors and finds the nearest matches to a query vector in milliseconds, even with thousands of chunks.
-
-**TTS — facebook/mms-tts-guj**
-A VITS (Variational Inference with adversarial learning for end-to-end Text-to-Speech) model trained specifically on Gujarati by Meta's Massively Multilingual Speech project. Converts Gujarati text to natural-sounding speech entirely offline.
-
----
-
-## 📊 Benchmark Results
-
-Run the Benchmark tab in the app to generate live results.
-Target metrics:
-- RAG retrieval accuracy: 70%+
-- Average response time: 2-5 seconds
-- TTS generation: ~1 second per sentence
-
----
-
-## 🔧 Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| `ModuleNotFoundError: sentence_transformers` | `pip install sentence-transformers` |
-| `ModuleNotFoundError: faiss` | `pip install faiss-cpu` |
-| Ollama offline warning in app | Run `ollama serve` in a separate terminal |
-| RAG index not found | Run `python step2_build_rag.py` |
-| App shows RAG only mode | Ollama not running or `gemma2:2b` not pulled |
-| TTS not loading | Run `pip install transformers torch soundfile` |
-
----
-
-## 🗺️ Future Roadmap
-
-- **Phase 2:** STT integration using OpenAI Whisper for voice input
-- **Phase 3:** 4-bit quantization of Gemma 2B for on-device mobile deployment
-- **Phase 4:** Flutter Android app with on-device RAG + LLM
-
----
-
-## 📚 References
-
-- Lewis et al. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS.
-- Pratap et al. (2023). Scaling Speech Technology to 1,000+ Languages. Meta AI.
-- Johnson et al. (2019). Billion-scale similarity search with GPUs. Facebook AI Research.
-- Google DeepMind. (2024). Gemma: Open Models Based on Gemini Research and Technology.
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=FF9933&height=100&section=footer" />
+</div>

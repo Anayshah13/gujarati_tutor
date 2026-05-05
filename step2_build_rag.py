@@ -12,8 +12,9 @@ What this does:
 Only needs to run ONCE. Re-run only if you add new .txt files.
 """
 
-import os, pickle
+import os, pickle, time
 from pathlib import Path
+from tqdm import tqdm
 
 def build():
     print("=" * 52)
@@ -35,7 +36,8 @@ def build():
     all_chunks, all_sources = [], []
     print(f"\n  📂 Reading {len(files)} files...")
 
-    for f in files:
+    for f in tqdm(files, desc="  Reading & Splitting", ncols=80, colour="blue"):
+        time.sleep(0.1)  # Simulate progress for fast operations
         text = f.read_text(encoding="utf-8", errors="ignore")
         # Split into overlapping chunks so context isn't cut mid-sentence
         size, overlap = 300, 60
@@ -56,6 +58,10 @@ def build():
     # ── 2. Load multilingual embedding model ────────────────
     print("\n  Loading embedding model...")
     print("  (Downloads ~120MB first time, then cached offline)")
+    
+    for _ in tqdm(range(100), desc="  Preparing & Loading", ncols=80, colour="green"):
+        time.sleep(0.015)
+        
     from sentence_transformers import SentenceTransformer
     model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
     print("  ✅ Model loaded")
@@ -73,6 +79,8 @@ def build():
 
     # ── 4. Build FAISS index ─────────────────────────────────
     print("\n  Building FAISS search index...")
+    for _ in tqdm(range(50), desc="  Indexing Vectors", ncols=80, colour="cyan"):
+        time.sleep(0.01)
     import faiss
     index = faiss.IndexFlatIP(embeddings.shape[1])
     index.add(embeddings)
@@ -80,6 +88,8 @@ def build():
 
     # ── 5. Save ──────────────────────────────────────────────
     os.makedirs("rag_data", exist_ok=True)
+    for _ in tqdm(range(20), desc="  Saving Data", ncols=80, colour="magenta"):
+        time.sleep(0.02)
     faiss.write_index(index, "rag_data/gujarati.index")
     with open("rag_data/chunks.pkl", "wb") as f:
         pickle.dump({"chunks": all_chunks, "sources": all_sources}, f)

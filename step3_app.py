@@ -9,6 +9,12 @@ from pathlib import Path
 import numpy as np
 from datetime import datetime
 
+try:
+    import imageio_ffmpeg
+    os.environ["PATH"] += os.pathsep + os.path.dirname(imageio_ffmpeg.get_ffmpeg_exe())
+except ImportError:
+    pass
+
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="ગુજ AI Tutor",

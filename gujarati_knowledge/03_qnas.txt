@@ -1,0 +1,31 @@
+=== Conversational Q&A Dataset ===
+
+Q: How do I ask for someone's name in Gujarati?
+A: You can say "તમારું નામ શું છે?" (Tamaru naam shu chhe?).
+
+Q: How do you respond to "How are you?" in Gujarati?
+A: The typical response is "હું મજામાં છું" (Hu maja-maa chhu), which means "I am fine / I am having fun."
+
+Q: How do you say "I don't understand" in Gujarati?
+A: You can say "મને સમજણ પડતી નથી" (Mane samajhan padti nathi) or simply "મને નથી સમજાતું" (Mane nathi samajhatu).
+
+Q: What is a polite way to say "Excuse me" or "Forgive me"?
+A: You can say "માફ કરજો" (Maaf karjo).
+
+Q: How do I ask "How much does this cost?" at a shop?
+A: Ask "આનો શું ભાવ છે?" (Aano shu bhaav chhe?) or "આ કેટલાનું છે?" (Aa ketlanu chhe?).
+
+Q: How do you say "See you later" when taking leave?
+A: You can say "આવજો" (Aavjo) or "ફરી મળીશું" (Fari malishu - We will meet again).
+
+Q: How to politely ask for water?
+A: Say "મને થોડું પાણી આપોને" (Mane thodu pani aapone). The "ne" at the end makes it sound more polite.
+
+Q: How to request someone to speak slower?
+A: You can request "કૃપા કરીને ધીમે બોલો" (Krupa karine dhime bolo - Please speak slowly).
+
+Q: How to express hunger?
+A: Say "મને ભૂખ લાગી છે" (Mane bhukh laagi chhe).
+
+Q: How to tell someone you are full after a meal?
+A: You can say "મારું પેટ ભરાઈ ગયું છે" (Maru pet bharai gayu chhe) or simpler: "હું ધરાઈ ગયો છું" (Hu dharai gayo chhu - for males) / "હું ધરાઈ ગઈ છું" (Hu dharai gai chhu - for females).
