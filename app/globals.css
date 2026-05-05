@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-primary: #fff8f0;
+  --bg-secondary: #fff3e0;
+  --accent: #ff6b00;
+  --accent-gold: #ffb300;
+  --accent-burnt: #e65100;
+  --accent-soft: #ff8f00;
+  --success: #2e7d32;
+  --error: #c62828;
+  --text-primary: #1a0a00;
+  --text-secondary: #5d3a1a;
+  --text-muted: #8d6e63;
+  --card-border: #f5e6d0;
+}
+
+body {
+  background: var(--bg-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--text-primary);
+}
+
+.gujarati-text {
+  font-family: 'Noto Sans Gujarati', var(--font-inter), system-ui, sans-serif;
+}
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, #ff6b00, #ffb300);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-sunrise-bg {
+  background: linear-gradient(135deg, #ff6b00 0%, #ffb300 50%, #ff8f00 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

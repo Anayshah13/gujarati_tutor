@@ -1,16 +1,43 @@
-# React + Vite
+# Gujarati Tutor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web app for practicing Gujarati through multiple-choice questions. It adapts what you see next using **Bayesian Knowledge Tracing (BKT)** so weaker skills get more attention.
 
-Currently, two official plugins are available:
+Built with **React 19** and **Vite**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Level choice** — Primary School (standard priors) or High School (boosted starting mastery so questions skew toward medium difficulty sooner).
+- **Adaptive quiz** — After each answer, BKT updates per-skill mastery. The next question targets the **weakest non-mastered skill**, with easy vs medium pools based on current mastery.
+- **Skill progress** — Live bars for estimated mastery (target **95%**) across: vowels, numbers, greetings, basic vocabulary, and simple sentences.
+- **Question bank** — Items live in `src/gujarati_questions.json` (skill, difficulty, prompt, options, answer, English helper text).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The **More Features** tab is a placeholder for future work.
 
-## Expanding the ESLint configuration
+## Run locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+Then open the URL Vite prints (usually `http://localhost:5173`).
+
+Other scripts:
+
+- `npm run build` — production build to `dist/`
+- `npm run preview` — serve the production build locally
+- `npm run lint` — ESLint
+
+## Project layout
+
+| Path | Role |
+|------|------|
+| `src/App.jsx` | UI: onboarding, quiz, navigation, progress panel |
+| `src/bkt.js` | BKT parameters, state init/update, weakest-skill and question selection |
+| `src/gujarati_questions.json` | Question bank |
+
+The BKT module also exposes `saveBKTState` / `loadBKTState` / `clearBKTState` for `localStorage`; the current UI does not persist sessions yet.
+
+## References
+
+BKT follows the classic Corbett & Anderson (1994) formulation; see comments in `src/bkt.js` for parameters and update steps.
