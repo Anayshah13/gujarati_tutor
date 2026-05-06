@@ -7,8 +7,10 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { supabase } from '@/lib/supabaseClient'
+
 type SessionRow = {
-  id: number
+  id: string
   start_level: number
   end_level: number | null
   total_questions: number
@@ -32,27 +34,26 @@ export default function SummaryPage() {
     if (typeof window === 'undefined') return
 
     const run = async () => {
-      const rawId = window.localStorage.getItem(STORAGE.lastSessionId)
-      const id = rawId ? Number(rawId) : NaN
-      if (!Number.isFinite(id)) {
+      const sessionId = window.localStorage.getItem(STORAGE.lastSessionId)
+      if (!sessionId) {
         setSession(null)
         setLoading(false)
         return
       }
 
       try {
-        const res = await fetch(`/api/sessions/${id}`)
-        if (!res.ok) {
+        const { data, error } = await supabase
+          .from('user_sessions')
+          .select('*')
+          .eq('id', sessionId)
+          .single()
+
+        if (error || !data) {
           setFetchError('Could not load session.')
           setSession(null)
           return
         }
-        const data: unknown = await res.json()
-        const s =
-          data && typeof data === 'object' && 'session' in data
-            ? (data as { session: SessionRow }).session
-            : null
-        setSession(s ?? null)
+        setSession(data as SessionRow)
       } catch {
         setFetchError('Could not load session.')
         setSession(null)

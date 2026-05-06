@@ -4,8 +4,9 @@ import ProgressBar from '@/components/ProgressBar'
 import QuestionCard from '@/components/QuestionCard'
 import Spinner from '@/components/Spinner'
 import { PLACEMENT_QUESTIONS } from '@/data/placement'
-import { getStartingLevel } from '@/lib/levelEngine'
+import { getStartingLevel, getBand } from '@/lib/levelEngine'
 import { STORAGE } from '@/lib/storage'
+import { supabase } from '@/lib/supabaseClient'
 import { abortRecognition, scorePronunciation, startListening } from '@/lib/speech'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
@@ -37,11 +38,23 @@ export default function PlacementPage() {
     window.sessionStorage.removeItem(STORAGE.pendingSummary)
   }, [])
 
-  const finalizePlacement = () => {
+  const finalizePlacement = async () => {
     const scoreTotal = correctRef.current
     const start = getStartingLevel(scoreTotal)
     setStartingLevel(start)
     persistLevels(start)
+    
+    // Save to supabase learning state
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      await supabase.from('user_learning_state').upsert({
+        user_id: user.id,
+        current_level: start,
+        current_band: getBand(start),
+        updated_at: new Date().toISOString()
+      })
+    }
+    
     setPhase('result')
   }
 

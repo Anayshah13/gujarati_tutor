@@ -3,12 +3,15 @@
 import QuestionCard from '@/components/QuestionCard'
 import SpeakButton from '@/components/SpeakButton'
 import Spinner from '@/components/Spinner'
-import { BAND_QUESTIONS } from '@/data/questions'
-import { generateQuestion, generateSessionInsight, rotateSkill } from '@/lib/gemini'
-import { getBand, getBandLabel, shouldUsHardcoded, updateLevel } from '@/lib/levelEngine'
+import { getBand, getBandLabel, updateLevel } from '@/lib/levelEngine'
 import { readNumber, STORAGE } from '@/lib/storage'
 import { abortRecognition, scorePronunciation, startListening } from '@/lib/speech'
 import type { QuizQuestion } from '@/types/question'
+import { ensureBasicUser } from '@/lib/supabaseAuth'
+import { applyStateToLocal, fetchLearningState } from '@/lib/learningStateService'
+import { getNextQuestion } from '@/lib/questionService'
+import { queueAnswer, flushQueue } from '@/lib/syncService'
+import { supabase } from '@/lib/supabaseClient'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -98,42 +101,47 @@ export default function QuizPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const lvl = liveLevel()
-    setLevel(lvl)
     bandHistoryRef.current = []
     askedIdsRef.current = []
     skillStatsRef.current = {}
 
-    const snap = window.sessionStorage.getItem(STORAGE.quizSessionStart)
-    const startLS = window.localStorage.getItem(STORAGE.startLevel)
-    const baseline = readNumber(snap ?? startLS, lvl)
-    setSessionStartLevel(baseline)
+    const boot = async () => {
+      try {
+        await ensureBasicUser()
+        const state = await fetchLearningState()
+        if (state) {
+          applyStateToLocal(state)
+        }
+      } catch (err) {
+        console.error('Boot error:', err)
+      }
 
-    setStreakDisplay(readNumber(window.localStorage.getItem(STORAGE.quizLiveStreak), 0))
-    streakRef.current = readNumber(window.localStorage.getItem(STORAGE.quizLiveStreak), 0)
+      const lvl = liveLevel()
+      setLevel(lvl)
 
-    const startLvlForDb = baseline
-    void fetch('/api/sessions/start', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ startLevel: startLvlForDb }),
-    })
-      .then((r) => r.json())
-      .then((data: unknown) => {
-        const sid =
-          data &&
-          typeof data === 'object' &&
-          'sessionId' in data &&
-          typeof (data as { sessionId: unknown }).sessionId === 'number'
-            ? (data as { sessionId: number }).sessionId
-            : null
-        if (sid != null && Number.isFinite(sid)) {
-          dbSessionIdRef.current = sid
-          window.localStorage.setItem(STORAGE.quizDbSessionId, String(sid))
+      const snap = window.sessionStorage.getItem(STORAGE.quizSessionStart)
+      const startLS = window.localStorage.getItem(STORAGE.startLevel)
+      const baseline = readNumber(snap ?? startLS, lvl)
+      setSessionStartLevel(baseline)
+
+      setStreakDisplay(readNumber(window.localStorage.getItem(STORAGE.quizLiveStreak), 0))
+      streakRef.current = readNumber(window.localStorage.getItem(STORAGE.quizLiveStreak), 0)
+
+      try {
+        const { data, error } = await supabase.functions.invoke('start-session', {
+          body: { startLevel: baseline }
+        })
+        if (!error && data?.sessionId) {
+          dbSessionIdRef.current = data.sessionId
+          window.localStorage.setItem('guj_ai_quiz_db_session_id', data.sessionId)
           sessionStartMsRef.current = Date.now()
         }
-      })
-      .catch(() => {})
+      } catch (e) {
+        console.error('Failed to start session on edge', e)
+      }
+    }
+    
+    void boot()
   }, [])
 
   useEffect(() => {
@@ -141,30 +149,16 @@ export default function QuizPage() {
   }, [level])
 
   const recordDbAnswer = useCallback((q: QuizQuestion, correct: boolean, levelBefore: number, levelAfter: number) => {
-    const sid = dbSessionIdRef.current
-    if (sid == null) return
-    void fetch('/api/sessions/answer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sessionId: sid,
-        questionId: q.id,
-        skill: q.skill,
-        band: q.band,
-        questionType: q.type,
-        correct,
-        levelBefore,
-        levelAfter,
-      }),
-    }).catch(() => {})
-  }, [])
-
-  const pickHardcoded = useCallback((band: number): QuizQuestion => {
-    const exclude = new Set(askedIdsRef.current)
-    const pool = BAND_QUESTIONS.filter((q) => q.band === band && !exclude.has(q.id))
-    if (pool.length) return pool[Math.floor(Math.random() * pool.length)]!
-    const anyPool = BAND_QUESTIONS.filter((q) => !exclude.has(q.id))
-    return anyPool[Math.floor(Math.random() * anyPool.length)] ?? BAND_QUESTIONS[0]!
+    queueAnswer({
+      questionId: q.id,
+      skill: q.skill,
+      band: q.band,
+      questionType: q.type,
+      correct,
+      levelBefore,
+      levelAfter,
+      answeredAt: new Date().toISOString()
+    })
   }, [])
 
   const loadQuestion = useCallback(async () => {
@@ -176,29 +170,33 @@ export default function QuizPage() {
     setLevel(lvlNow)
     const band = getBand(lvlNow)
 
-    const tail = tallyBandTail(band, bandHistoryRef.current)
-    const useHardcoded = shouldUsHardcoded(tail)
-
     setFeedback(null)
     setTranscript('')
     setSelectedOption(null)
     setListening(false)
 
-    let nextQ: QuizQuestion
-
-    if (useHardcoded) {
+    setLoading(true)
+    let nextQ: QuizQuestion | null = null
+    try {
+      nextQ = await getNextQuestion(band, askedIdsRef.current)
+    } finally {
       setLoading(false)
-      nextQ = pickHardcoded(band)
-    } else {
-      const skillFocus = rotateSkill(band, skillCursorRef.current)
-      try {
-        setLoading(true)
-        nextQ = await generateQuestion(band, skillFocus, askedIdsRef.current)
-        skillCursorRef.current += 1
-      } catch {
-        nextQ = pickHardcoded(band)
-      } finally {
-        setLoading(false)
+    }
+
+    if (!nextQ) {
+      // Very crude fallback if absolutely nothing works
+      nextQ = {
+        id: 'fallback_' + Date.now(),
+        type: 'mcq',
+        skill: 'Basics',
+        band: 1,
+        question: 'Offline mode active. Keep learning?',
+        gujaratiText: 'હા',
+        options: ['હા', 'ના', 'કદાચ', 'ખબર નહિ'],
+        answer: 'હા',
+        answerGujarati: 'હા',
+        explanation: 'The app is offline and out of cached questions.',
+        pronunciationTarget: null
       }
     }
 
@@ -206,7 +204,7 @@ export default function QuizPage() {
     bandHistoryRef.current = [...bandHistoryRef.current, band]
 
     setQuestion(nextQ)
-  }, [pickHardcoded])
+  }, [])
 
   useEffect(() => {
     if (!bootOnce.current) return
@@ -304,35 +302,28 @@ export default function QuizPage() {
     const lvlLive = liveLevel()
     const weak = weakestSkillFromStats(skillStatsRef.current)
 
-    let insight: string | null = null
-    try {
-      insight = await generateSessionInsight({
-        startLevel: sessionStartLevel ?? lvlLive,
-        endLevel: lvlLive,
-        totalQs,
-        correctQs,
-        weakSkill: weak,
-      })
-    } catch {
-      insight = null
-    }
+    // Optional: Could call an edge function for insight here
+    const insight: string | null = null
 
     const sid = dbSessionIdRef.current
     if (sid != null) {
       const durationSeconds = Math.max(0, Math.round((Date.now() - sessionStartMsRef.current) / 1000))
-      await fetch('/api/sessions/end', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      
+      // Flush any remaining answers before ending
+      await flushQueue()
+      
+      await supabase.functions.invoke('end-session', {
+        body: {
           sessionId: sid,
           endLevel: lvlLive,
           durationSeconds,
           weakSkill: weak,
           insight: insight ?? '',
-        }),
+        }
       }).catch(() => {})
+      
       window.localStorage.setItem(STORAGE.lastSessionId, String(sid))
-      window.localStorage.removeItem(STORAGE.quizDbSessionId)
+      window.localStorage.removeItem('guj_ai_quiz_db_session_id')
     }
 
     window.localStorage.removeItem(STORAGE.quizLiveStreak)

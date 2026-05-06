@@ -16,8 +16,10 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 
+import { supabase } from '@/lib/supabaseClient'
+
 type SessionListRow = {
-  id: number
+  id: string
   created_at: string
   start_level: number
   end_level: number | null
@@ -29,8 +31,8 @@ type SessionListRow = {
 }
 
 type AnswerRow = {
-  id: number
-  session_id: number
+  id: string
+  session_id: string
   question_id: string
   skill: string
   band: number
@@ -46,25 +48,26 @@ export default function AdminPage() {
   const [sessions, setSessions] = useState<SessionListRow[]>([])
   const [loading, setLoading] = useState(true)
   const [fetchError, setFetchError] = useState<string | null>(null)
-  const [expandedId, setExpandedId] = useState<number | null>(null)
-  const [detailAnswers, setDetailAnswers] = useState<Record<number, AnswerRow[]>>({})
-  const [detailLoading, setDetailLoading] = useState<number | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [detailAnswers, setDetailAnswers] = useState<Record<string, AnswerRow[]>>({})
+  const [detailLoading, setDetailLoading] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
     void (async () => {
       try {
-        const res = await fetch('/api/sessions/all')
-        if (!res.ok) throw new Error('fetch failed')
-        const data: unknown = await res.json()
-        const list =
-          data &&
-          typeof data === 'object' &&
-          'sessions' in data &&
-          Array.isArray((data as { sessions: unknown }).sessions)
-            ? (data as { sessions: SessionListRow[] }).sessions
-            : []
-        if (!cancelled) setSessions(list)
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) throw new Error('Not authenticated')
+
+        const { data, error } = await supabase
+          .from('user_sessions')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+
+        if (error) throw error
+
+        if (!cancelled) setSessions((data || []) as SessionListRow[])
       } catch {
         if (!cancelled) {
           setFetchError('Could not load sessions.')
@@ -107,7 +110,7 @@ export default function AdminPage() {
     window.localStorage.removeItem(STORAGE.quizLiveStreak)
   }, [])
 
-  async function toggleRow(id: number) {
+  async function toggleRow(id: string) {
     if (expandedId === id) {
       setExpandedId(null)
       return
@@ -116,13 +119,15 @@ export default function AdminPage() {
     if (detailAnswers[id]) return
     setDetailLoading(id)
     try {
-      const res = await fetch(`/api/sessions/${id}`)
-      const data: unknown = await res.json()
-      const answers =
-        data && typeof data === 'object' && 'answers' in data && Array.isArray((data as { answers: unknown }).answers)
-          ? (data as { answers: AnswerRow[] }).answers
-          : []
-      setDetailAnswers((prev) => ({ ...prev, [id]: answers }))
+      const { data, error } = await supabase
+        .from('session_answers')
+        .select('*')
+        .eq('session_id', id)
+        .order('answered_at', { ascending: true })
+
+      if (error) throw error
+
+      setDetailAnswers((prev) => ({ ...prev, [id]: (data || []) as AnswerRow[] }))
     } catch {
       setDetailAnswers((prev) => ({ ...prev, [id]: [] }))
     } finally {
